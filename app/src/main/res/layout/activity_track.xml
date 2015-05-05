@@ -3,7 +3,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context="org.fossasia.activities.TrackActivity">
+              tools:context="org.opentech.activities.TrackActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

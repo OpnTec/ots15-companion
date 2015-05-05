@@ -1,4 +1,4 @@
-# FOSSASIA Companion
+# OpenTech summit 2015 app based on FOSSASIA companion-android
 
 Advanced native Android schedule browser application for the [FOSSASIA](http://fossasia.org/) conference in Singapore.
 

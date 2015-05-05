@@ -32,7 +32,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 
-import org.fossasia.R;
+import org.opentech.R;
 
 /**
  * Draws a line for each page. The current page line is colored differently

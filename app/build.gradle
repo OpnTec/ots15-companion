@@ -4,7 +4,7 @@ android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
     defaultConfig {
-        applicationId 'org.fossasia'
+        applicationId 'org.opentech'
         minSdkVersion 9
         targetSdkVersion 21
     }

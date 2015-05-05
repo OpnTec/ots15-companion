@@ -35,7 +35,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.fossasia.R;
+import org.opentech.R;
 
 import java.util.Locale;
 

@@ -3,5 +3,5 @@
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:id="@+id/map"
-          tools:context="org.fossasia.activities.MapsActivity"
+          tools:context="org.opentech.activities.MapsActivity"
           android:name="com.google.android.gms.maps.SupportMapFragment"/>
