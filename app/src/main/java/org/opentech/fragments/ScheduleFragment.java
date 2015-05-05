@@ -49,9 +49,9 @@ public class ScheduleFragment extends Fragment {
 
 
             ArrayList<Day> staticDays = new ArrayList<>();
-            staticDays.add(new Day(0, "March 13"));
-            staticDays.add(new Day(1, "March 14"));
-            staticDays.add(new Day(2, "March 15"));
+            staticDays.add(new Day(0, "May 13"));
+            staticDays.add(new Day(1, "May 14"));
+            staticDays.add(new Day(2, "May 15"));
 
 
             daysAdapter = new DayLoader(getChildFragmentManager(), track, staticDays);
