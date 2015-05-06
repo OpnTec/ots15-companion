@@ -17,7 +17,7 @@ All dependencies are defined in ```app/build.gradle```. Import the project in An
 The result apk file will be placed in ```app/build/outputs/apk/```.   
 
 ####Build status
-[![Build Status](https://travis-ci.org/fossasia/ots15-companion.svg?branch=master)](https://travis-ci.org/fossasia/ots15-companion)
+[![Build Status](https://travis-ci.org/fossasia/ots15-companion.svg?branch=master)](https://travis-ci.org/fossasia/ots15-companion) 
 
 ## Pending Task
 * Download schedule in a background thread
@@ -47,4 +47,5 @@ The result apk file will be placed in ```app/build/outputs/apk/```.
 * Pratik Todi
 * Mario Behling
 * Tymon Radzik
+* Arnav Gupta
 

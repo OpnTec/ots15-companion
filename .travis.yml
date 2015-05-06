@@ -15,7 +15,7 @@ deploy:
   provider: releases
   skip_cleanup: true
   api_key:
-    secure: o4CPYfEDU/qSkERjPS00cvRpw+fCXf3kRv8iZtwYtqOoESF/Ck/uX6TVqVm6myc2Bw4y4NmWg9cLjbGKBAgzoGpPaTjhQeZfbqe0AbHnEn5bO5JJQHmOEp+El2muiB+Z8wnusCfyI9lvB761MN7Rij41KOLyDXHlEMrBXaUzpP8=
+    secure: UxQf5WQ08IJH30i1vLDY+V6TImk1qdUq15yJNFXtJX4/3r4gUuLUWJc7gLaYi3vi+guS1R4ndnsTjaF2yVvjAL7owsQrurx91LvqQ0P9q6ZB66j8QCTM2qBuZ97eC/UO7B57agi0mxKoySQS3PRBJ3iBlVMMEb0LploQ6BilnbE=
   file: app/build/outputs/apk/app-release.apk
   on:
     tags: true
