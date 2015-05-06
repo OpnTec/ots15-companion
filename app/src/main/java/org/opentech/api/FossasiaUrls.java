@@ -15,7 +15,7 @@ public class FossasiaUrls {
     public static final String FIELD_URL = PART_URL + "1707242319";
 
 
-    public static final String SPONSOR_URL = "https://docs.google.com/a/iiitd.ac.in/spreadsheets/d/1tt6LXrnc_onSZEbAzzA0bZiq_mtPFNHE8a8P5a6T-tQ/gviz/tq?gid=658081232";
+    public static final String SPONSOR_URL = PART_URL + "948384915";
 
 
 

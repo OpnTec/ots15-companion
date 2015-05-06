@@ -119,7 +119,7 @@ public class JsonToDatabase {
                 String url;
                 Sponsor temp;
 
-                for (int i = 0; i < jsonArray1.length(); i++) {
+                for (int i = 1; i < jsonArray1.length(); i++) {
 
                     try {
                         name = jsonArray1.getJSONObject(i).getJSONArray("c").getJSONObject(0).getString("v");
