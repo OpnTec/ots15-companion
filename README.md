@@ -14,7 +14,10 @@ All dependencies are defined in ```app/build.gradle```. Import the project in An
 ./gradlew assembleRelease
 ```
 
-The result apk file will be placed in ```app/build/outputs/apk/```.
+The result apk file will be placed in ```app/build/outputs/apk/```.   
+
+####Build status
+[![Build Status](https://travis-ci.org/fossasia/ots15-companion.svg?branch=master)](https://travis-ci.org/fossasia/ots15-companion)
 
 ## Pending Task
 * Download schedule in a background thread
