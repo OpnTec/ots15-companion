@@ -1,0 +1,22 @@
+language: android
+script: ./gradlew clean assembleRelease
+android:
+  components:
+  - platform-tools
+  - tools
+  - build-tools-21.1.2
+  - android-21
+  - extra-google-google_play_services
+  - extra-google-m2repository
+  - extra-android-m2repository
+  - addon-google_apis-google-21
+  - extra-android-support
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: UxQf5WQ08IJH30i1vLDY+V6TImk1qdUq15yJNFXtJX4/3r4gUuLUWJc7gLaYi3vi+guS1R4ndnsTjaF2yVvjAL7owsQrurx91LvqQ0P9q6ZB66j8QCTM2qBuZ97eC/UO7B57agi0mxKoySQS3PRBJ3iBlVMMEb0LploQ6BilnbE=
+  file: app/build/outputs/apk/app-release.apk
+  on:
+    tags: true
+    all_branches: true
