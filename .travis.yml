@@ -1,5 +1,5 @@
 language: android
-script: ./gradlew clean assembleRelease
+script: ./gradlew clean assembleDebug
 android:
   components:
   - platform-tools
@@ -16,7 +16,7 @@ deploy:
   skip_cleanup: true
   api_key:
     secure: UxQf5WQ08IJH30i1vLDY+V6TImk1qdUq15yJNFXtJX4/3r4gUuLUWJc7gLaYi3vi+guS1R4ndnsTjaF2yVvjAL7owsQrurx91LvqQ0P9q6ZB66j8QCTM2qBuZ97eC/UO7B57agi0mxKoySQS3PRBJ3iBlVMMEb0LploQ6BilnbE=
-  file: app/build/outputs/apk/app-release.apk
+  file: app/build/outputs/apk/app-debug.apk
   on:
     tags: true
     all_branches: true
