@@ -7,6 +7,14 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.Toast;
+
 import org.opentech.activities.EventDetailsActivity;
 import org.opentech.adapters.ScheduleAdapter;
 import org.opentech.db.DatabaseManager;

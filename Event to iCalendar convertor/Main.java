@@ -7,6 +7,7 @@ import java.io.Reader;
 import java.net.SocketException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import net.fortuna.ical4j.data.CalendarOutputter;
@@ -238,7 +239,7 @@ public class Main {
 			VTimeZone tz = timezone.getVTimeZone();
 			java.util.Calendar startDate = new GregorianCalendar();
 			startDate.setTimeZone(timezone);
-			startDate.set(java.util.Calendar.MONTH, java.util.Calendar.MARCH);
+			startDate.set(java.util.Calendar.MONTH, Calendar.MAY);
 			startDate.set(java.util.Calendar.DAY_OF_MONTH, Integer.parseInt(date[1]));
 			startDate.set(java.util.Calendar.YEAR, 2015);
 			startDate.set(java.util.Calendar.HOUR_OF_DAY, hour);
@@ -246,7 +247,7 @@ public class Main {
 			startDate.set(java.util.Calendar.SECOND, 0);
 			java.util.Calendar endDate = new GregorianCalendar();
 			endDate.setTimeZone(timezone);
-			endDate.set(java.util.Calendar.MONTH, java.util.Calendar.MARCH);
+			endDate.set(java.util.Calendar.MONTH, java.util.Calendar.MAY);
 			endDate.set(java.util.Calendar.DAY_OF_MONTH, Integer.parseInt(date[1]));
 			endDate.set(java.util.Calendar.YEAR, 2015);
 			endDate.set(java.util.Calendar.HOUR_OF_DAY, hour);
@@ -272,13 +273,13 @@ public class Main {
 		TimeZone timezone = registry.getTimeZone("America/Mexico_City");
 		VTimeZone tz = timezone.getVTimeZone();
 		startDate.setTimeZone(timezone);
-		startDate.set(java.util.Calendar.MONTH, java.util.Calendar.MARCH);
+		startDate.set(java.util.Calendar.MONTH, java.util.Calendar.MAY);
 		String[] date = sDate.split(" ");
 		startDate.set(java.util.Calendar.DAY_OF_MONTH, Integer.parseInt(date[1]));
 		startDate.set(java.util.Calendar.YEAR, 2015);
 		java.util.Calendar endDate = new GregorianCalendar();
 		endDate.setTimeZone(timezone);
-		endDate.set(java.util.Calendar.MONTH, java.util.Calendar.MARCH);
+		endDate.set(java.util.Calendar.MONTH, java.util.Calendar.MAY);
 		endDate.set(java.util.Calendar.DAY_OF_MONTH, Integer.parseInt(date[1]));
 		endDate.set(java.util.Calendar.YEAR, 2015);
 		DateTime start = new DateTime(startDate.getTime());

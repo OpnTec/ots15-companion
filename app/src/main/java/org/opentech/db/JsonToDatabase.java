@@ -207,7 +207,7 @@ public class JsonToDatabase {
                         //Generate query
                         queries.add(temp.generateSql());
 
-                        // Log.d(TAG, name);
+                        // Log.d(TAG + "    start ", url);
 
                         fetchData(FossasiaUrls.PART_URL + url, venue, name, (i + 50) * 100);
 
@@ -242,9 +242,6 @@ public class JsonToDatabase {
 
     private void fetchData(String url, final String venue, final String forceTrack, final int id) {
 
-        Log.d(TAG, url);
-
-
         final RequestQueue queue = VolleySingleton.getReqQueue(context);
 
         // Request a string response from the provided URL.
@@ -253,7 +250,7 @@ public class JsonToDatabase {
             @Override
             public void onResponse(String response) {
                 JSONArray jsonArray = removePaddingFromString(response);
-                Log.d(TAG, jsonArray.toString());
+                // Log.d("fetch_data", jsonArray.toString());
 
                 String firstName;
                 String lastName;
@@ -310,25 +307,29 @@ public class JsonToDatabase {
                         moderator = jsonArray.getJSONObject(i).getJSONArray("c").getJSONObject(Constants.MODERATOR)
                                 .getString("v");
                         String logData = "First Name: %s\nLast Name: %s\nDate: %s\nTime: %s\nOrganization: %s\nEmail: %s\nBlog: %s\nTwitter: %s\nType Of Proposal: %s\nTopic Name:%s\nTrack: %s\nAbstarct: %s\nDescription: %s\nURL: %s";
-                        //  logData = String.format(logData, firstName, lastName, date, time, organization, email, blog, twitter, typeOfProposal, topicName, field, proposalAbstract, description, url);
-                        //                        Log.d(TAG, logData);
+                          logData = String.format(logData, firstName, lastName, date, time, organization, email, blog, twitter, typeOfProposal, topicName, field, proposalAbstract, description, url);
+                        Log.d("fetch_date ::::: ", logData);
                         int id2 = id + i;
                         if (date.equals("") || firstName.equals("") || time.equals("") || topicName.equals("")) {
                             continue;
                         }
                         String[] dayDate = date.split(" ");
+                        Log.d("DAte" , dayDate.toString());
                         day = dayDate[0];
                         date = dayDate[1] + " " + dayDate[2];
                         FossasiaEvent temp = new FossasiaEvent(id2, topicName, field, date, day, time, proposalAbstract, description, venue, forceTrack, moderator);
-
+                       // String logData = "First Name: %s\nLast Name: %s\nDate: %s\nTime: %s\nOrganization: %s\nEmail: %s\nBlog: %s\nTwitter: %s\nType Of Proposal: %s\nTopic Name:%s\nTrack: %s\nAbstarct: %s\nDescription: %s\nURL: %s";
+                        //logData = String.format(logData, firstName, lastName, date, time, organization, email, blog, twitter, typeOfProposal, topicName, field, proposalAbstract, description, url);
+                        //Log.d(TAG, logData);
 
                         fullName = firstName + " " + lastName;
                         Speaker tempSpeaker = new Speaker(id2, fullName, "", linkedIn, twitter, organization, url, 0);
                         queries.add(tempSpeaker.generateSqlQuery());
                         queries.add(temp.generateSqlQuery());
+
                         String query = "INSERT INTO %s VALUES ('%s', %d, '%s');";
                         query = String.format(query, DatabaseHelper.TABLE_NAME_SPEAKER_EVENT_RELATION, fullName, id2, StringUtils.replaceUnicode(topicName));
-                        //                        Log.d(TAG, query);
+                        Log.d(" track query","");
                         queries.add(query);
 
 

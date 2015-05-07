@@ -151,14 +151,14 @@ public class StringUtils {
                 if (hour == 12) {
                     hour = 0;
                 }
-            cal.set(2015, Calendar.MARCH, Integer.parseInt(date[1]), hour, min);
+            cal.set(2015, Calendar.MAY, Integer.parseInt(date[1]), hour, min);
             return cal.getTime();
         }
 
 
         Calendar cal = Calendar.getInstance();
         String[] date = sDate.split(" ");
-        cal.set(2015, Calendar.MARCH, Integer.parseInt(date[1]));
+        cal.set(2015, Calendar.MAY, Integer.parseInt(date[1]));
         if (sTime != null) {
         }
         return cal.getTime();
