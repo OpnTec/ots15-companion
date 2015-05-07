@@ -8,7 +8,19 @@ android {
         minSdkVersion 9
         targetSdkVersion 21
     }
+
+    signingConfigs {
+        debug {
+            storeFile file('debug.jks')
+            storePassword "open-event"
+            keyAlias "open-event"
+            keyPassword "open-event"
+        }
+    }
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
