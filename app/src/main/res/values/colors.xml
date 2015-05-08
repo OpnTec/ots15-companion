@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="color_primary">#f08130</color>
+    <color name="color_primary" id="primary_color">#f08130</color>
     <color name="color_primary_dark">#F57C00</color>
     <color name="color_accent">#f08130</color>
     <color name="fosdem_blue_translucent">#663479c4</color>

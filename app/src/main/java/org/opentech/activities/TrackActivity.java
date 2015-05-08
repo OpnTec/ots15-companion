@@ -1,6 +1,7 @@
 package org.opentech.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -9,6 +10,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.nispok.snackbar.Snackbar;
+import com.nispok.snackbar.listeners.ActionClickListener;
+
 import org.opentech.R;
 import org.opentech.db.DatabaseManager;
 import org.opentech.fragments.ScheduleFragment;
@@ -16,6 +20,7 @@ import org.opentech.fragments.ScheduleFragment;
 public class TrackActivity extends ActionBarActivity {
 
     private String track;
+    private String map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +32,7 @@ public class TrackActivity extends ActionBarActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, ScheduleFragment.newInstance(track), ScheduleFragment.TAG).addToBackStack(null).commit();
         setTitle("Tracks: " + track);
+
     }
 
 
@@ -46,12 +52,24 @@ public class TrackActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.directions) {
-
+            //Get Map location from Database made from getting data from sheet.
             DatabaseManager db = DatabaseManager.getInstance();
-            String map = "https://www.google.com.sg/maps/place/Biopolis/@1.304256,103.79179,16z/data=!4m2!3m1!1s0x0:0x9965b36cbf8d88c3";//db.getTrackMapUrl(track);
-            Log.d("TRack ACTIVITY" , map);
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
-            startActivity(intent);
+            map = db.getTrackMapUrl(track);
+            Log.d("TRACK ACTIVITY",map);
+
+            if (!map.equals("") ){
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
+                startActivity(intent);
+            }
+            else{
+                Snackbar.with(getApplicationContext())
+                        .text("No Location specified")
+                        .color(getResources().getColor(R.color.color_primary))
+                        .show(this);
+            }
+
+
             return true;
         }
 

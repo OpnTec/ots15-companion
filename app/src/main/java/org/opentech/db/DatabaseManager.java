@@ -591,7 +591,7 @@ public class DatabaseManager {
 
     public String getTrackMapUrl(String track) {
         Cursor cursor = helper.getReadableDatabase().rawQuery(String.format("SELECT map FROM %s WHERE track='%s'", DatabaseHelper.TABLE_NAME_TRACK_VENUE, track), null);
-        String map = "htttp://maps.google.com/";
+        String map = ""; //= "htttp://maps.google.com/";
         if (cursor.moveToFirst()) {
             map = cursor.getString(0);
         }

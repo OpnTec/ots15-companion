@@ -32,6 +32,7 @@ public class ScheduleFragment extends Fragment {
 
     private DayLoader daysAdapter;
     private ViewHolder holder;
+    private String track;
 
     public static Fragment newInstance(String track) {
         ScheduleFragment fragment = new ScheduleFragment();
@@ -45,15 +46,10 @@ public class ScheduleFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            String track = getArguments().getString("TRACK");
-
+            track = getArguments().getString("TRACK");
 
             ArrayList<Day> staticDays = new ArrayList<>();
-            //staticDays.add(new Day(0, "May 13"));
             staticDays.add(new Day(1, "May 14"));
-            //staticDays.add(new Day(2, "May 15"));
-
-
             daysAdapter = new DayLoader(getChildFragmentManager(), track, staticDays);
         }
 
@@ -70,7 +66,6 @@ public class ScheduleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
         DatabaseManager db = DatabaseManager.getInstance();
-        String track = getArguments().getString("TRACK");
         ArrayList<Day> days = db.getDates(track);
 
         String subTitle = "";
@@ -120,12 +115,11 @@ public class ScheduleFragment extends Fragment {
     }
 
     private void launchDirections() {
-        // Build intent to start Google Maps directions
-//        String uri = String.format(Locale.US,
-//                "https://www.google.com/maps/search/%1$s/@%2$f,%3$f,17z
 
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com.sg/maps/place/Biopolis/@1.304256,103.79179,16z/data=!4m2!3m1!1s0x0:0x9965b36cbf8d88c3"));
+        DatabaseManager db = DatabaseManager.getInstance();
 
+        String map = db.getTrackMapUrl(track);
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
         startActivity(intent);
     }
 

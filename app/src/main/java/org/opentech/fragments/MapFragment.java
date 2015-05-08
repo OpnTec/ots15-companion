@@ -20,42 +20,41 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.opentech.R;
+import org.opentech.db.DatabaseManager;
 
 import java.util.Locale;
 
 public class MapFragment extends SupportMapFragment{
 
-    private static final double DESTINATION_LATITUDE = 1.29677;
-    private static final double DESTINATION_LONGITUDE = 103.786914;
-    private static final String DESTINATION_NAME = "Plug-In@Blk71";
+    private static final double DESTINATION_LATITUDE = 52.52433;
+    private static final double DESTINATION_LONGITUDE = 13.389893;
+        private static final String DESTINATION_NAME = "Kalkscheune Johannisstraße 2  10117 Berlin Germany";
     private GoogleMap mMap;
+    String map_url ;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+       // DatabaseManager db =  new DatabaseManager();
+       // db.getTrackMapUrl()
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         mMap = getMap();
         if(mMap != null) {
             MarkerOptions eventMarker = new MarkerOptions().position(new LatLng(
                     DESTINATION_LATITUDE,
                     DESTINATION_LONGITUDE)).title(DESTINATION_NAME);
-            CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(eventMarker.getPosition(), 12.0f);
+            CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(eventMarker.getPosition(), 14.0f);
             mMap.addMarker(eventMarker);
             mMap.animateCamera(cu);
 
         }
     }
-
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//
-//        return inflater.inflate(R.layout.fragment_map, container, false);
-//    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -81,6 +80,10 @@ public class MapFragment extends SupportMapFragment{
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 
         startActivity(intent);
+    }
+
+    private void get_Latlng(){
+
     }
 
 }

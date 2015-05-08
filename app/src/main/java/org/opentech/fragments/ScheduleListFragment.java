@@ -3,6 +3,7 @@ package org.opentech.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -65,7 +66,7 @@ public class ScheduleListFragment extends SmoothListFragment {
         intent.putExtra("event", events.get(position));
         DatabaseManager db = DatabaseManager.getInstance();
         String map = db.getTrackMapUrl(track);
-        intent.putExtra("MAP", map);
+;        intent.putExtra("MAP", map);
         startActivity(intent);
         super.onListItemClick(l, v, position, id);
     }

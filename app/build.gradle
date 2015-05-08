@@ -40,4 +40,5 @@ dependencies {
     compile 'com.android.support:cardview-v7:22.0.0'
     compile 'com.github.chrisbanes.photoview:library:1.2.2'
     compile 'com.google.android.gms:play-services:7.0.0'
+    compile 'com.nispok:snackbar:2.10.+'
 }
