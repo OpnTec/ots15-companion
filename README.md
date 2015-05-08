@@ -38,7 +38,7 @@ The result apk file will be placed in ```app/build/outputs/apk/```.
 * [ViewPagerIndicator](http://viewpagerindicator.com/) by Jake Wharton
 * [PhotoView](https://github.com/chrisbanes/PhotoView) by Chris Banes
 * [Volley Library](https://android.googlesource.com/platform/frameworks/volley)
-
+* [Snackbar Library](https://github.com/nispok/snackbar) by nispok
 ## Contributors
 
 * Christophe Beyls
