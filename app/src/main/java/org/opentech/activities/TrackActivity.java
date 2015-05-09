@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,7 +33,6 @@ public class TrackActivity extends ActionBarActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, ScheduleFragment.newInstance(track), ScheduleFragment.TAG).addToBackStack(null).commit();
         setTitle("Tracks: " + track);
-
     }
 
 
@@ -57,14 +57,14 @@ public class TrackActivity extends ActionBarActivity {
             map = db.getTrackMapUrl(track);
             Log.d("TRACK ACTIVITY",map);
 
-            if (!map.equals("") ){
+            if (!TextUtils.isEmpty(map)){
 
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
                 startActivity(intent);
             }
             else{
                 Snackbar.with(getApplicationContext())
-                        .text("No Location specified")
+                        .text(R.string.no_location)
                         .color(getResources().getColor(R.color.color_primary))
                         .show(this);
             }

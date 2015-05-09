@@ -52,6 +52,7 @@
     <string name="developer_room">Developer room</string>
     <string name="lightning_talk">Lightning talk</string>
     <string name="certification_exam">Certification Exam</string>
+    <string name="no_location">No Location Specified</string>
 
     <!-- Search -->
     <string name="search_events">Search events</string>
