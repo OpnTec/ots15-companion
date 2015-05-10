@@ -4,7 +4,7 @@ android:orientation="vertical" android:layout_width="match_parent"
 android:layout_height="match_parent">
 <com.android.volley.toolbox.NetworkImageView
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="150dp"
     android:layout_margin="10dp"
     android:id="@+id/imageView_sponsor"
     android:scaleType="centerInside"
