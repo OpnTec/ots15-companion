@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.CircularNetworkImageView;
 
 import org.opentech.R;
 import org.opentech.model.Speaker;
@@ -65,7 +65,7 @@ public class SpeakerAdapter extends BaseAdapter {
         SpeakerHolder holder = new SpeakerHolder();
         holder.name = (TextView) row.findViewById(R.id.textView_speaker_name);
         holder.designation = (TextView) row.findViewById(R.id.textView_speaker_designation);
-        holder.speakerImage = (NetworkImageView) row.findViewById(R.id.imageView_speaker_pic);
+        holder.speakerImage = (CircularNetworkImageView) row.findViewById(R.id.imageView_speaker_pic);
         holder.speakerImage.setDefaultImageResId(R.drawable.default_user);
         holder.information = (TextView) row.findViewById(R.id.textView_speaker_information);
         holder.linkedIn = (ImageView) row.findViewById(R.id.imageView_linkedin);
@@ -150,7 +150,7 @@ public class SpeakerAdapter extends BaseAdapter {
     public static class SpeakerHolder {
         TextView name;
         TextView designation;
-        NetworkImageView speakerImage;
+        CircularNetworkImageView speakerImage;
         TextView information;
         ImageView linkedIn;
         ImageView twitter;

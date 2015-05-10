@@ -10,7 +10,7 @@
         android:layout_gravity="center_vertical">
 
 
-        <com.android.volley.toolbox.NetworkImageView
+        <com.android.volley.toolbox.CircularNetworkImageView
             android:id="@+id/imageView_speaker_pic"
             android:layout_width="60dp"
             android:layout_height="60dp"

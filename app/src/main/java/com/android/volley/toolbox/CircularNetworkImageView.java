@@ -37,7 +37,7 @@ import com.android.volley.toolbox.ImageLoader.ImageListener;
  * Handles fetching an image from a URL as well as the life-cycle of the
  * associated request.
  */
-public class NetworkImageView extends ImageView {
+public class CircularNetworkImageView extends ImageView {
     /**
      * The URL of the network image to load
      */
@@ -63,25 +63,25 @@ public class NetworkImageView extends ImageView {
      */
     private ImageContainer mImageContainer;
 
-    public NetworkImageView(Context context) {
+    public CircularNetworkImageView(Context context) {
         this(context, null);
     }
 
-    public NetworkImageView(Context context, AttributeSet attrs) {
+    public CircularNetworkImageView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public NetworkImageView(Context context, AttributeSet attrs, int defStyle) {
+    public CircularNetworkImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
     /**
      * Sets URL of the image that should be loaded into this view. Note that calling this will
      * immediately either set the cached image (if available) or the default image specified by
-     * {@link com.android.volley.toolbox.NetworkImageView#setDefaultImageResId(int)} on the view.
+     * {@link CircularNetworkImageView#setDefaultImageResId(int)} on the view.
      * <p/>
-     * NOTE: If applicable, {@link com.android.volley.toolbox.NetworkImageView#setDefaultImageResId(int)} and
-     * {@link com.android.volley.toolbox.NetworkImageView#setErrorImageResId(int)} should be called prior to calling
+     * NOTE: If applicable, {@link CircularNetworkImageView#setDefaultImageResId(int)} and
+     * {@link CircularNetworkImageView#setErrorImageResId(int)} should be called prior to calling
      * this function.
      *
      * @param url         The URL that should be loaded into this ImageView.
@@ -252,9 +252,9 @@ public class NetworkImageView extends ImageView {
         paint.setAntiAlias(true);
         canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(color);
-//        canvas.drawCircle(bm.getWidth() / 2,
-//                bm.getHeight() / 2, bm.getWidth() / 2, paint);
-        canvas.drawRect(rect, paint);
+        canvas.drawCircle(bm.getWidth() / 2,
+                bm.getHeight() / 2, bm.getWidth() / 2, paint);
+//        canvas.drawRect(rect, paint);
         paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
         canvas.drawBitmap(bm, rect, rect, paint);
         super.setImageBitmap(output);
