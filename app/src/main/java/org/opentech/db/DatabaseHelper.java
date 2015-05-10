@@ -42,7 +42,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_VENUE = "CREATE TABLE " + TABLE_NAME_VENUE
             + " (track TEXT, venue TEXT, map TEXT, room TEXT, link TEXT, address TEXT, how_to_reach TEXT);";
 
-    private static final String DATABASE_NAME = "fosdem.sqlite6";
+    private static final String DATABASE_NAME = "database.sqlite6";
     private static final int DATABASE_VERSION = 1;
 
     private String dynamicTableTracks;
