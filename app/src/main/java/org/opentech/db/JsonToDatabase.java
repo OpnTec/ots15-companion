@@ -37,6 +37,7 @@ public class JsonToDatabase {
     private JsonToDatabaseCallback mCallback;
     private int count;
     private int version;
+    private int default_version= 0;
     SharedPreferences version_database;
     SharedPreferences.Editor editor;
 
@@ -113,7 +114,7 @@ public class JsonToDatabase {
 
         RequestQueue queue = VolleySingleton.getReqQueue(context);
         version_database = context.getSharedPreferences(VERSION_DB,Context.MODE_PRIVATE);
-
+        final int current_version= version_database.getInt(VERSION_DB,0);
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(url, new Listener<String>() {
 
@@ -160,8 +161,12 @@ public class JsonToDatabase {
                         temp = new Venue(name, venue, mapLocation, room, link, address, howToReach);
                         queries.add(temp.generateSql());
 
-                        if (version != 1) {
-                            Log.d(TAG, "datafetch");
+                        if (version != current_version) {
+                            Log.d(TAG, "datafetch" + current_version);
+                            editor = version_database.edit();
+                            //TODO: MAKE THIS WORK
+                            editor.putInt(VERSION_DB,version);
+                            Log.d(TAG, "version"+version);
                             fetchData(FossasiaUrls.PART_URL + url, venue, name, (i + 50) * 100);
 
                         }
@@ -172,7 +177,6 @@ public class JsonToDatabase {
                 }
                 Log.d(TAG + " STARTT", version + "");
                 count--;
-
                 checkStatus();
 
             }

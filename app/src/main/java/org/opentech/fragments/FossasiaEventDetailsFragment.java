@@ -24,6 +24,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.method.MovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,6 +35,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.opentech.ConnectionDetect;
 import org.opentech.R;
 import org.opentech.db.DatabaseManager;
 import org.opentech.loaders.BookmarkStatusLoader;
@@ -58,6 +60,7 @@ public class FossasiaEventDetailsFragment extends Fragment {
     private static final DateFormat TIME_DATE_FORMAT = DateUtils.getTimeDateFormat();
     private FossasiaEvent event;
     private int personsCount = 1;
+    private Boolean Notconnected = false;
     private final LoaderCallbacks<EventDetails> eventDetailsLoaderCallbacks = new LoaderCallbacks<EventDetails>() {
 
         @Override
@@ -203,11 +206,10 @@ public class FossasiaEventDetailsFragment extends Fragment {
         String startTime = event.getStartTime();
         text = String.format("%1$s, %2$s", event.getDay(), (startTime != null) ? startTime : "?");
         ((TextView) view.findViewById(R.id.time)).setText(text);
-        TextView moderator = (TextView)view.findViewById(R.id.moderators);
-        if(event.getModerator() == null || event.getModerator().equals("")) {
+        TextView moderator = (TextView) view.findViewById(R.id.moderators);
+        if (event.getModerator() == null || event.getModerator().equals("")) {
             moderator.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             moderator.setText("Moderator: " + event.getModerator());
         }
         final String venue = event.getVenue();
@@ -217,8 +219,10 @@ public class FossasiaEventDetailsFragment extends Fragment {
         // If the room image exists, make the room text clickable to display it
         roomText.setSpan(new UnderlineSpan(), 0, roomText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         final String map = getArguments().getString("MAP");
-
+        ConnectionDetect cd = new ConnectionDetect(getActivity().getApplicationContext());
+        Notconnected = cd.isConnecting();
         roomTextView.setOnClickListener(new View.OnClickListener() {
+
 
             @Override
             public void onClick(View view) {
@@ -255,10 +259,19 @@ public class FossasiaEventDetailsFragment extends Fragment {
                 mapLink.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
-                        startActivity(intent);
+                        if (Notconnected = false) {
+                            Log.d("Notconnected", "true");
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
+                            startActivity(intent);
+                        } else {
+                            Log.d("Notconnected", "false");
+                            Toast.makeText(getActivity().getApplicationContext(), R.string.not_connected, Toast.LENGTH_LONG).show();
+                        }
                     }
+
                 });
+
+
                 ok.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -269,6 +282,7 @@ public class FossasiaEventDetailsFragment extends Fragment {
                 dialog.show();
             }
         });
+
         roomTextView.setFocusable(true);
         roomTextView.setText(roomText);
 
@@ -397,7 +411,14 @@ public class FossasiaEventDetailsFragment extends Fragment {
                 }
                 return true;
             case R.id.add_to_agenda:
-                addToAgenda();
+                ConnectionDetect cd = new ConnectionDetect(getActivity().getApplicationContext());
+                Notconnected = cd.isConnecting();
+                if (Notconnected = false) {
+                    addToAgenda();
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), R.string.not_connected, Toast.LENGTH_LONG).show();
+
+                }
                 return true;
         }
         return false;

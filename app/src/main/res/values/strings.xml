@@ -65,6 +65,7 @@
     <string name="event_not_found_error">Unable to load the session details.\nMake sure the database has been updated to the latest version.</string>
     <string name="schedule_loading_error">An error occurred while updating the schedule. Please try again later.</string>
     <string name="search_length_error">The minimum search text length is 3 chars.</string>
+    <string name="not_connected">Not connected to Internet !! Connect ot view latest Data.</string>
 
     <!-- Settings -->
     <string name="settings">Settings</string>
