@@ -39,6 +39,8 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:22.0.+'
     compile 'com.android.support:cardview-v7:22.0.0'
-    compile 'com.google.android.gms:play-services:7.0.0'
     compile 'com.nispok:snackbar:2.10.+'
+    compile 'org.osmdroid:osmdroid-android:4.3'
+    compile 'org.apache.directory.studio:org.slf4j.api:1.7.2'
+    compile 'org.slf4j:slf4j-simple:1.7.12'
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,49 +12,52 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.metalev.multitouch.controller.MultiTouchController;
 import org.opentech.R;
 import org.opentech.db.DatabaseManager;
+import org.osmdroid.events.MapListener;
+import org.osmdroid.events.ScrollEvent;
+import org.osmdroid.events.ZoomEvent;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.OverlayItem;
 
 import java.util.Locale;
 
-public class MapFragment extends SupportMapFragment{
+public class MapFragment extends Fragment {
 
     private static final double DESTINATION_LATITUDE = 52.52433;
     private static final double DESTINATION_LONGITUDE = 13.389893;
         private static final String DESTINATION_NAME = "Kalkscheune Johannisstraße 2  10117 Berlin Germany";
-    private GoogleMap mMap;
     String map_url ;
+    MapView mapView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-       // DatabaseManager db =  new DatabaseManager();
-       // db.getTrackMapUrl()
     }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        View rootView = inflater.inflate(R.layout.fragment_map, container);
+        mapView = (MapView) rootView.findViewById(R.id.mapview);
+
+        GeoPoint geoPoint = new GeoPoint(DESTINATION_LATITUDE, DESTINATION_LONGITUDE);
+        OverlayItem position = new OverlayItem(DESTINATION_NAME, "Location", geoPoint);
+
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mMap = getMap();
-        if(mMap != null) {
-            MarkerOptions eventMarker = new MarkerOptions().position(new LatLng(
-                    DESTINATION_LATITUDE,
-                    DESTINATION_LONGITUDE)).title(DESTINATION_NAME);
-            CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(eventMarker.getPosition(), 15.0f);
-            mMap.addMarker(eventMarker);
-            mMap.animateCamera(cu);
-
-        }
     }
 
     @Override
