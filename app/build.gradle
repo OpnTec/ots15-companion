@@ -5,6 +5,8 @@ android {
     buildToolsVersion "21.1.2"
     defaultConfig {
         applicationId 'org.opentech'
+        versionCode 14
+        versionName "1.4"
         minSdkVersion 9
         targetSdkVersion 21
     }
