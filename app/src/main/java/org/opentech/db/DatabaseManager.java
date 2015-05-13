@@ -81,19 +81,19 @@ public class DatabaseManager {
     }
 
     private static void clearDatabase(SQLiteDatabase db) {
-//        db.delete(DatabaseHelper.EVENTS_TABLE_NAME, null, null);
-//        db.delete(DatabaseHelper.EVENTS_TITLES_TABLE_NAME, null, null);
-//        db.delete(DatabaseHelper.PERSONS_TABLE_NAME, null, null);
-//        db.delete(DatabaseHelper.EVENTS_PERSONS_TABLE_NAME, null, null);
-//        db.delete(DatabaseHelper.LINKS_TABLE_NAME, null, null);
-//        db.delete(DatabaseHelper.TRACKS_TABLE_NAME, null, null);
-//        db.delete(DatabaseHelper.DAYS_TABLE_NAME, null, null);
-//        // Deleting Fossasia tables
-//        db.delete(DatabaseHelper.TABLE_NAME_KEY_SPEAKERS, null, null);
-//        db.delete(DatabaseHelper.TABLE_NAME_SCHEDULE, null, null);
-//        db.delete(DatabaseHelper.TABLE_NAME_SPEAKER_EVENT_RELATION, null, null);
-//        db.delete(DatabaseHelper.TABLE_NAME_TRACK, null, null);
-//        db.delete(DatabaseHelper.TABLE_NAME_SPONSOR, null, null);
+        db.delete(DatabaseHelper.EVENTS_TABLE_NAME, null, null);
+        db.delete(DatabaseHelper.EVENTS_TITLES_TABLE_NAME, null, null);
+        db.delete(DatabaseHelper.PERSONS_TABLE_NAME, null, null);
+        db.delete(DatabaseHelper.EVENTS_PERSONS_TABLE_NAME, null, null);
+        db.delete(DatabaseHelper.LINKS_TABLE_NAME, null, null);
+        db.delete(DatabaseHelper.TRACKS_TABLE_NAME, null, null);
+        db.delete(DatabaseHelper.DAYS_TABLE_NAME, null, null);
+        // Deleting Fossasia tables
+        db.delete(DatabaseHelper.TABLE_NAME_KEY_SPEAKERS, null, null);
+        db.delete(DatabaseHelper.TABLE_NAME_SCHEDULE, null, null);
+        db.delete(DatabaseHelper.TABLE_NAME_SPEAKER_EVENT_RELATION, null, null);
+        db.delete(DatabaseHelper.TABLE_NAME_TRACK, null, null);
+        db.delete(DatabaseHelper.TABLE_NAME_SPONSOR, null, null);
 
     }
 
