@@ -237,7 +237,7 @@ public class FossasiaEventDetailsFragment extends Fragment {
                 final AlertDialog dialog = alertDialogBuilder.create();
                 dialog.getWindow().setWindowAnimations(R.style.VenueDialogAnimation);
                 TextView ok = (TextView) dialogView.findViewById(R.id.venue_okay);
-                TextView mapLink = (TextView) dialogView.findViewById(R.id.venue_map);
+               // TextView mapLink = (TextView) dialogView.findViewById(R.id.venue_map);
                 TextView venueLink = (TextView) dialogView.findViewById(R.id.venue_link);
                 TextView venueName = (TextView) dialogView.findViewById(R.id.venue_name);
                 TextView venueAddress = (TextView) dialogView.findViewById(R.id.venue_address);
@@ -248,20 +248,20 @@ public class FossasiaEventDetailsFragment extends Fragment {
                 howToReach.setText(ven.getHowToReach());
 
                 venueName.setText(ven.getVenue());
-                venueLink.setText(ven.getLink());
+               // venueLink.setText(R.id.venue_map);
+//                venueLink.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(ven.getLink()));
+//                        startActivity(intent);
+//                    }
+//                });
                 venueLink.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(ven.getLink()));
-                        startActivity(intent);
-                    }
-                });
-                mapLink.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (Notconnected = false) {
+                        if (Notconnected = true) {
                             Log.d("Notconnected", "true");
-                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(map));
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(ven.getLink()));
                             startActivity(intent);
                         } else {
                             Log.d("Notconnected", "false");
@@ -410,16 +410,17 @@ public class FossasiaEventDetailsFragment extends Fragment {
                     new UpdateBookmarkAsyncTask(event).execute(isBookmarked);
                 }
                 return true;
-            case R.id.add_to_agenda:
-                ConnectionDetect cd = new ConnectionDetect(getActivity().getApplicationContext());
-                Notconnected = cd.isConnecting();
-                if (Notconnected = false) {
-                    addToAgenda();
-                } else {
-                    Toast.makeText(getActivity().getApplicationContext(), R.string.not_connected, Toast.LENGTH_LONG).show();
-
-                }
-                return true;
+            //TODO:understand and make this work. Also add entry in menu/events.xml
+//            case R.id.add_to_agenda:
+//                ConnectionDetect cd = new ConnectionDetect(getActivity().getApplicationContext());
+//                Notconnected = cd.isConnecting();
+//                if (Notconnected = false) {
+//                    addToAgenda();
+//                } else {
+//                    Toast.makeText(getActivity().getApplicationContext(), R.string.not_connected, Toast.LENGTH_LONG).show();
+//
+//                }
+//                return true;
         }
         return false;
     }

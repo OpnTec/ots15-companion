@@ -10,6 +10,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import org.opentech.R;
 import org.opentech.api.FossasiaUrls;
 import org.opentech.model.Field;
 import org.opentech.model.FossasiaEvent;
@@ -36,8 +37,8 @@ public class JsonToDatabase {
     private ArrayList<String> queries;
     private JsonToDatabaseCallback mCallback;
     private int count;
-    private int version;
-    private int default_version= 0;
+    private int version ;
+    private int default_version= 1;
     SharedPreferences version_database;
     SharedPreferences.Editor editor;
 
@@ -57,6 +58,7 @@ public class JsonToDatabase {
 
     public void startDataDownload() {
         //fetchTracks(FossasiaUrls.TRACKS_URL);
+
         startTrackUrlFetch(FossasiaUrls.VERSION_TRACK_URL);
         SponsorUrl(FossasiaUrls.SPONSOR_URL);
 
@@ -160,14 +162,14 @@ public class JsonToDatabase {
                         queries.add(query);
                         temp = new Venue(name, venue, mapLocation, room, link, address, howToReach);
                         queries.add(temp.generateSql());
+                        fetchData(FossasiaUrls.PART_URL + url, venue, name, (i + 50) * 100);
 
                         if (version != current_version) {
                             Log.d(TAG, "datafetch" + current_version);
-                            editor = version_database.edit();
+                            // editor = version_database.edit();
                             //TODO: MAKE THIS WORK
-                            editor.putInt(VERSION_DB,version);
-                            Log.d(TAG, "version"+version);
-                            fetchData(FossasiaUrls.PART_URL + url, venue, name, (i + 50) * 100);
+                            //editor.putInt(VERSION_DB, version);
+                            Log.d(TAG, "version" + version);
 
                         }
                     } catch (JSONException e) {
@@ -195,9 +197,9 @@ public class JsonToDatabase {
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
         count++;
+        fetchTracks(FossasiaUrls.TRACKS_URL);
 
         if (version != 1) {
-            fetchTracks(FossasiaUrls.TRACKS_URL);
 
         }
     }
@@ -471,9 +473,10 @@ public class JsonToDatabase {
         if (tracks && count == 0) {
             DatabaseManager dbManager = DatabaseManager.getInstance();
             //Temporary clearing database for testing only
+            dbManager.clearDatabase();
+            dbManager.performInsertQueries(queries);
             if (version != 1) {
-                dbManager.clearDatabase();
-                dbManager.performInsertQueries(queries);
+
             }
             //Implement callbacks
             if (mCallback != null) {
