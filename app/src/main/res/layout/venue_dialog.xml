@@ -95,23 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/VenueAttributeTextView"
-            android:text="Map"
-            android:layout_marginBottom="@dimen/venue_attribute_margin_bottom"/>
-
-
-        <TextView
-            android:id="@+id/venue_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/VenueAttributeValueTextView"
-            android:text="@string/venue_map"
-            android:layout_marginBottom="@dimen/venue_attribute_value_margin_bottom"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/VenueAttributeTextView"
-            android:text="Link"
+            android:text="Map Link"
             android:layout_marginBottom="@dimen/venue_attribute_margin_bottom"/>
 
         <TextView
@@ -119,7 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/VenueAttributeValueTextView"
-            android:text="@string/venue_link"
+            android:text="@string/venue_map"
             android:layout_marginBottom="17dp"/>
     </LinearLayout>
 

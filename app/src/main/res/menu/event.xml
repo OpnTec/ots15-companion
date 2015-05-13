@@ -12,10 +12,6 @@
         android:icon="@drawable/ic_share_white_24dp"
         android:title="@string/share"
         app:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/add_to_agenda"
-        android:icon="@drawable/ic_event_add_white_24dp"
-        android:title="@string/add_to_agenda"
-        app:showAsAction="ifRoom"/>
+
 
 </menu>

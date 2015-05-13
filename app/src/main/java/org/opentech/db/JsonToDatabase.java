@@ -10,17 +10,16 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.opentech.api.FossasiaUrls;
-import org.opentech.model.Field;
 import org.opentech.model.FossasiaEvent;
 import org.opentech.model.Speaker;
 import org.opentech.model.Sponsor;
 import org.opentech.model.Venue;
 import org.opentech.utils.StringUtils;
 import org.opentech.utils.VolleySingleton;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -37,7 +36,8 @@ public class JsonToDatabase {
     private JsonToDatabaseCallback mCallback;
     private int count;
     private int version;
-    private int default_version= 0;
+    private int default_version = 0;
+    private int current_version;
     SharedPreferences version_database;
     SharedPreferences.Editor editor;
 
@@ -57,6 +57,7 @@ public class JsonToDatabase {
 
     public void startDataDownload() {
         //fetchTracks(FossasiaUrls.TRACKS_URL);
+
         startTrackUrlFetch(FossasiaUrls.VERSION_TRACK_URL);
         SponsorUrl(FossasiaUrls.SPONSOR_URL);
 
@@ -113,8 +114,11 @@ public class JsonToDatabase {
 
 
         RequestQueue queue = VolleySingleton.getReqQueue(context);
-        version_database = context.getSharedPreferences(VERSION_DB,Context.MODE_PRIVATE);
-        final int current_version= version_database.getInt(VERSION_DB,0);
+//        editor = version_database.edit();
+//        editor.putInt(VERSION_DB, default_version);
+//        editor.commit();
+//        Log.d(TAG, version_database.getInt(VERSION_DB, default_version) + "");
+
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(url, new Listener<String>() {
 
@@ -160,22 +164,24 @@ public class JsonToDatabase {
                         queries.add(query);
                         temp = new Venue(name, venue, mapLocation, room, link, address, howToReach);
                         queries.add(temp.generateSql());
-
+                        version_database = context.getSharedPreferences(VERSION_DB, Context.MODE_PRIVATE);
+                        current_version = version_database.getInt(VERSION_DB, default_version);
                         if (version != current_version) {
-                            Log.d(TAG, "datafetch" + current_version);
-                            editor = version_database.edit();
-                            //TODO: MAKE THIS WORK
-                            editor.putInt(VERSION_DB,version);
-                            Log.d(TAG, "version"+version);
+                            //Log.d(TAG, "datafetch" + current_version);
+                            //Log.d(TAG, "version" + version);
+                            DatabaseManager db = DatabaseManager.getInstance();
+                            db.clearDatabase();
                             fetchData(FossasiaUrls.PART_URL + url, venue, name, (i + 50) * 100);
-
+                            editor = version_database.edit();
+                            editor.putInt(VERSION_DB, version);
+                            editor.commit();
                         }
                     } catch (JSONException e) {
                         //  Log.e(TAG, "JSON Error: " + e.getMessage() + "\nResponse" + response);
                     }
 
                 }
-                Log.d(TAG + " STARTT", version + "");
+                // Log.d(TAG + " STARTT", version + "");
                 count--;
                 checkStatus();
 
@@ -195,9 +201,9 @@ public class JsonToDatabase {
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
         count++;
+        fetchTracks(FossasiaUrls.TRACKS_URL);
 
         if (version != 1) {
-            fetchTracks(FossasiaUrls.TRACKS_URL);
 
         }
     }
@@ -268,8 +274,8 @@ public class JsonToDatabase {
                                 .getString("v");
                         moderator = jsonArray.getJSONObject(i).getJSONArray("c").getJSONObject(Constants.MODERATOR)
                                 .getString("v");
-                        String logData = "First Name: %s\nLast Name: %s\nDate: %s\nTime: %s\nOrganization: %s\nEmail: %s\nBlog: %s\nTwitter: %s\nType Of Proposal: %s\nTopic Name:%s\nTrack: %s\nAbstarct: %s\nDescription: %s\nURL: %s";
-                        logData = String.format(logData, firstName, lastName, date, time, organization, email, blog, twitter, typeOfProposal, topicName, field, proposalAbstract, description, url);
+//                        String logData = "First Name: %s\nLast Name: %s\nDate: %s\nTime: %s\nOrganization: %s\nEmail: %s\nBlog: %s\nTwitter: %s\nType Of Proposal: %s\nTopic Name:%s\nTrack: %s\nAbstarct: %s\nDescription: %s\nURL: %s";
+//                        logData = String.format(logData, firstName, lastName, date, time, organization, email, blog, twitter, typeOfProposal, topicName, field, proposalAbstract, description, url);
                         int id2 = id + i;
                         if (date.equals("") || firstName.equals("") || time.equals("") || topicName.equals("")) {
                             continue;
@@ -471,9 +477,10 @@ public class JsonToDatabase {
         if (tracks && count == 0) {
             DatabaseManager dbManager = DatabaseManager.getInstance();
             //Temporary clearing database for testing only
+            dbManager.clearDatabase();
+            dbManager.performInsertQueries(queries);
             if (version != 1) {
-                dbManager.clearDatabase();
-                dbManager.performInsertQueries(queries);
+
             }
             //Implement callbacks
             if (mCallback != null) {

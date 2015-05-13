@@ -49,7 +49,7 @@ public class MapFragment extends SupportMapFragment{
             MarkerOptions eventMarker = new MarkerOptions().position(new LatLng(
                     DESTINATION_LATITUDE,
                     DESTINATION_LONGITUDE)).title(DESTINATION_NAME);
-            CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(eventMarker.getPosition(), 14.0f);
+            CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(eventMarker.getPosition(), 15.0f);
             mMap.addMarker(eventMarker);
             mMap.animateCamera(cu);
 
