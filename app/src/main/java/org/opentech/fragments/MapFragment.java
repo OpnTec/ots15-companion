@@ -12,26 +12,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-
-import org.metalev.multitouch.controller.MultiTouchController;
 import org.opentech.R;
-import org.opentech.db.DatabaseManager;
-import org.osmdroid.events.MapListener;
-import org.osmdroid.events.ScrollEvent;
-import org.osmdroid.events.ZoomEvent;
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class MapFragment extends Fragment {
 
     private static final double DESTINATION_LATITUDE = 52.52433;
     private static final double DESTINATION_LONGITUDE = 13.389893;
-        private static final String DESTINATION_NAME = "Kalkscheune Johannisstraße 2  10117 Berlin Germany";
-    String map_url ;
+    private static final String DESTINATION_NAME = "Kalkscheune Johannisstraße 2  10117 Berlin Germany";
     MapView mapView;
 
     @Override
@@ -45,9 +40,30 @@ public class MapFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_map, container);
         mapView = (MapView) rootView.findViewById(R.id.mapview);
+        mapView.setBuiltInZoomControls(true);
+        mapView.setMultiTouchControls(true);
 
         GeoPoint geoPoint = new GeoPoint(DESTINATION_LATITUDE, DESTINATION_LONGITUDE);
+        mapView.getController().setCenter(geoPoint);
+        mapView.getController().setZoom(15);
         OverlayItem position = new OverlayItem(DESTINATION_NAME, "Location", geoPoint);
+
+        ArrayList<OverlayItem> items = new ArrayList<>();
+        items.add(position);
+
+        mapView.getOverlays().add(new ItemizedIconOverlay<>(items,
+                new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+                    @Override
+                    public boolean onItemSingleTapUp(int index, OverlayItem item) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onItemLongPress(int index, OverlayItem item) {
+                        return false;
+                    }
+                }, new DefaultResourceProxyImpl(getActivity())));
+        mapView.invalidate();
 
         return super.onCreateView(inflater, container, savedInstanceState);
     }
